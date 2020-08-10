@@ -1,7 +1,6 @@
 package abstractdemo;
 
 /**
- * @ClassName AbstractEmployee
  * @Description 抽象类
  * @Date 2020/6/29  18:26
  **/

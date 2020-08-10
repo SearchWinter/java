@@ -1,7 +1,6 @@
 package abstractdemo;
 
 /**
- * @ClassName StaticDemo1
  * @Description 与abstractdemo2里面的StaticDemo做验证
  * @Date 2020/6/29  18:45
  **/

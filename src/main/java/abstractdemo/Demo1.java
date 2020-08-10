@@ -1,7 +1,6 @@
 package abstractdemo;
 
 /**
- * @ClassName Demo1
  * @Description  protected 同一个包内都可以访问
  * @Date 2020/7/3  9:20
  **/
