@@ -5,7 +5,6 @@ import abstractdemo.StaticDemo1;
 /**
  * @ClassName Demo
  * @Description protected  不同包的子类也不能访问
- * @Author Li Anjun
  * @Date 2020/7/3  9:18
  **/
 public class Demo extends StaticDemo1 {
