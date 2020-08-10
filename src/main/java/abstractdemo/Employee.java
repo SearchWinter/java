@@ -1,7 +1,6 @@
 package abstractdemo;
 
 /**
- * @Author Li Anjun
  * @Description 一个类只能继承一个抽象类
  * @Date 15:05 2020/7/1
  **/

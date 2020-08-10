@@ -3,7 +3,6 @@ package abstractdemo;
 /**
  * @ClassName AbstractEmployee
  * @Description 抽象类
- * @Author Li Anjun
  * @Date 2020/6/29  18:26
  **/
 public abstract class AbstractEmployee {

@@ -3,7 +3,6 @@ package abstractdemo;
 /**
  * @ClassName StaticDemo1
  * @Description 与abstractdemo2里面的StaticDemo做验证
- * @Author Li Anjun
  * @Date 2020/6/29  18:45
  **/
 public class StaticDemo1 {
