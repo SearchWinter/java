@@ -2,23 +2,23 @@ package thread.block;
 
 
 /**
- * @Description ToDO
+ * @Description 消费者
  **/
 public class Consumer implements Runnable {
-    private StorageBlock storageBlock;
+    private StorageBlock2 storageBlock;
 
     public Consumer() {
     }
 
-    public Consumer(StorageBlock storageBlock, String name) {
+    public Consumer(StorageBlock2 storageBlock, String name) {
         this.storageBlock = storageBlock;
     }
 
     @Override
     public void run() {
-        while (true){
+        while (!Thread.interrupted()) {
             try {
-                Thread.sleep(3000);
+                Thread.sleep(1000);
                 storageBlock.consume();
             } catch (InterruptedException e) {
                 e.printStackTrace();
