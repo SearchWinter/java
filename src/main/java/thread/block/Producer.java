@@ -2,21 +2,21 @@ package thread.block;
 
 
 /**
- * @Description ToDO
+ * @Description 生产者
  **/
 public class Producer implements Runnable {
-    private StorageBlock storageBlock;
+    private StorageBlock2 storageBlock;
 
     public Producer() {
     }
 
-    public Producer(StorageBlock storageBlock, String name) {
+    public Producer(StorageBlock2 storageBlock, String name) {
         this.storageBlock = storageBlock;
     }
 
     @Override
     public void run() {
-        while (true){
+        while (!Thread.interrupted()) {
             try {
                 Thread.sleep(1000);
                 storageBlock.produce();
