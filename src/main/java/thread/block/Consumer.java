@@ -16,6 +16,7 @@ public class Consumer implements Runnable {
 
     @Override
     public void run() {
+        //线程未被阻断时执行
         while (!Thread.interrupted()) {
             try {
                 Thread.sleep(1000);
