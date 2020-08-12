@@ -1,4 +1,4 @@
-package thread.block;
+package thread.blockqueue;
 
 
 /**
@@ -16,13 +16,9 @@ public class Producer implements Runnable {
 
     @Override
     public void run() {
-        while (!Thread.interrupted()) {
-            try {
-                Thread.sleep(1000);
+            //一个生产者执行10次生产方法
+            for (int i = 0; i < 10; i++) {
                 storageBlock.produce();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
-        }
     }
 }
