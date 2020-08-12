@@ -1,4 +1,4 @@
-package thread.block;
+package thread.blockqueue;
 
 
 /**
@@ -17,13 +17,6 @@ public class Consumer implements Runnable {
     @Override
     public void run() {
         //线程未被阻断时执行
-        while (!Thread.interrupted()) {
-            try {
-                Thread.sleep(1000);
                 storageBlock.consume();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }
