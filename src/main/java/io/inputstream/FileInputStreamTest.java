@@ -3,9 +3,7 @@ package io.inputstream;
 import java.io.*;
 
 /**
- * @ClassName FileInputStreamTest
  * @Description 文件输入流案例,读取文件的内容，然后在控制台输出
- * @Author Li Anjun
  * @Date 2020/7/16  10:30
  **/
 public class FileInputStreamTest {
