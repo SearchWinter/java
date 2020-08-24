@@ -22,6 +22,6 @@ public class CacheThreadPool {
         }
         cachedThreadPool.shutdownNow();
         cachedThreadPool.awaitTermination(3, TimeUnit.SECONDS);
-
+        System.out.println("test");
     }
 }
