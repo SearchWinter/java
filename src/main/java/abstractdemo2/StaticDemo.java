@@ -9,7 +9,6 @@ import static abstractdemo.StaticDemo1.*;
 /**
  * @ClassName StaticDemo
  * @Description 验证静态变量的各种使用，
- * @Author Li Anjun
  * @Date 2020/6/29  18:43
  **/
 public class StaticDemo {

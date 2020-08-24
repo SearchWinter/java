@@ -14,4 +14,12 @@ public class TestDemo {
         String s = DigestUtils.md2Hex(string);
         System.out.println(s);
     }
+    @Test
+    public void subTest(){
+        String string="org.junit";
+        int i = string.indexOf(".");
+        //包括beginIndex 不包括endIndex
+        String substring = string.substring(0, i);
+        System.out.println(substring);
+    }
 }

@@ -1,9 +1,7 @@
 package casting;
 
 /**
- * @ClassName Test
  * @Description 测试方法
- * @Author Li Anjun
  * @Date 2020/6/30  10:47
  **/
 public class Test {

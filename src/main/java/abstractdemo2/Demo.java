@@ -3,7 +3,6 @@ package abstractdemo2;
 import abstractdemo.StaticDemo1;
 
 /**
- * @ClassName Demo
  * @Description protected  不同包的子类也不能访问
  * @Date 2020/7/3  9:18
  **/

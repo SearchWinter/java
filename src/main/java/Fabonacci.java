@@ -1,7 +1,5 @@
 /**
- * @ClassName Fabonacci
  * @Description 斐波拉契数列
- * @Author Li Anjun
  * @Date 2020/6/29  16:37
  **/
 public class Fabonacci {

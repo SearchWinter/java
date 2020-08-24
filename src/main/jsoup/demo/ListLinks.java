@@ -9,7 +9,6 @@ import java.io.IOException;
 
 /**
  * @Description 从一个URL获取一个页面，提取页面中所有的连接、图片和其他辅助内容，并检查URL和文本信息
- * @Date 2020/7/27  16:28
  **/
 public class ListLinks {
     public static void main(String[] args)  throws IOException {
@@ -37,7 +36,4 @@ public class ListLinks {
         }*/
     }
 
-    public static void downUrl(){
-
-    }
 }

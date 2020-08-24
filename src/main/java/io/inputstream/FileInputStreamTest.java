@@ -1,6 +1,13 @@
 package io.inputstream;
 
+import org.junit.Test;
+
 import java.io.*;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 /**
  * @Description 文件输入流案例,读取文件的内容，然后在控制台输出
@@ -33,6 +40,23 @@ public class FileInputStreamTest {
 
         //关闭读取流
         ipsReader.close();
+
+    }
+    /** 文本中有中文，怎么读取*/
+    @Test
+    public void test() throws IOException {
+        Path path = Paths.get("E:\\HQPeek.PeekForexServer_debug_20200813.log");
+        FileChannel open = FileChannel.open(path, StandardOpenOption.READ);
+
+        BufferedReader bufReader = new BufferedReader(Channels.newReader(open, "UTF-8"));
+
+        bufReader.lines().forEach(line->{
+            String[] split = line.split("|", -1);
+            for (String str:split
+                 ) {
+                System.out.println(str);
+            }
+        });
 
     }
 }

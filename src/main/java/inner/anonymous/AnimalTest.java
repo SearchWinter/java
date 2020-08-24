@@ -1,6 +1,5 @@
 package inner.anonymous;
 
-import jdk.nashorn.internal.ir.CallNode;
 
 /**
  * @ClassName AnimalTest

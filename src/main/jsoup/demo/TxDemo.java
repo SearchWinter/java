@@ -46,7 +46,7 @@ public class TxDemo {
             URL url = new URL(imgUrl);
             // 获得连接
             URLConnection connection = url.openConnection();
-            // 设置10秒的相应时间
+            // 设置10秒的响应时间
             connection.setConnectTimeout(10 * 1000);
             // 获得输入流
             InputStream in = connection.getInputStream();

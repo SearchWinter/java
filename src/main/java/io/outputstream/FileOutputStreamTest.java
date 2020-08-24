@@ -3,9 +3,7 @@ package io.outputstream;
 import java.io.*;
 
 /**
- * @ClassName FileOutputStreamTest
  * @Description 输出流就是从流中写数据到文件中
- * @Author Li Anjun
  * @Date 2020/7/16  10:35
  **/
 public class FileOutputStreamTest {

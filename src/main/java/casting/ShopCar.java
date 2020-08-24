@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @ClassName ShopCar
  * @Description TODO
- * @Author Li Anjun
  * @Date 2020/6/30  10:42
  **/
 public class ShopCar {

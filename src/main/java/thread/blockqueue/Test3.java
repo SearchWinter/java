@@ -13,7 +13,7 @@ import static thread.blockqueue.StorageBlock2.lbqueue;
  **/
 public class Test3 {
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newFixedThreadPool(1100);
+        ExecutorService executorService = Executors.newFixedThreadPool(11000);
 
         StorageBlock2 storageBlock = new StorageBlock2();
 

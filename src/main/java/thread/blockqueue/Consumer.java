@@ -16,7 +16,6 @@ public class Consumer implements Runnable {
 
     @Override
     public void run() {
-        //线程未被阻断时执行
-                storageBlock.consume();
+        storageBlock.consume();
     }
 }

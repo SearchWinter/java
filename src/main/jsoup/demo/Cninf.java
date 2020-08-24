@@ -7,7 +7,6 @@ import java.io.IOException;
 
 /**
  * @Description TODO
- * @Date 2020/7/31  9:43
  **/
 public class Cninf {
     public static void main(String[] args) throws IOException {

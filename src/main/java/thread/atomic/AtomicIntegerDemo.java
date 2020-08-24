@@ -11,20 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  **/
 public class AtomicIntegerDemo {
     public static void main(String[] args) throws InterruptedException {
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
         AtomicInteger count = new AtomicInteger(10);
-        for (int i = 0; i <100 ; i++) {
-            executorService.submit(()->{
-                System.out.println(Thread.currentThread().getName()+"count="+count.get());
-                count.incrementAndGet();
-            });
-        }
-        ExecutorService executorService1 = Executors.newFixedThreadPool(3);
-        executorService.submit(()->{
-            System.out.println(count);
-        });
-        executorService.shutdown();
-        executorService.awaitTermination(10, TimeUnit.SECONDS);
         System.out.println(count.get());
     }
 }

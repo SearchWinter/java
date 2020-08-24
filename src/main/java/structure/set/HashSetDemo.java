@@ -17,8 +17,11 @@ public class HashSetDemo {
         set.add("1");
         set.add("8989FASD");
         //set里面不能有重复的值，添加了两个"A",最后打印出来也只会有一个A
-/*      set.add("A");
-        System.out.println(set);*/
+        set.add("A");
+        System.out.println(set);
+        //set也重写了toString()
+        String string = set.toString();
+        System.out.println(string);
 
         //第二种通过list构造
         //    HashSet<> hs = new HashSet<>(list);
@@ -52,5 +55,9 @@ public class HashSetDemo {
 /*        HashSet<String> setClone = new HashSet<>();
         setClone=(HashSet<String>) set.clone();
         System.out.println(setClone);*/
+
+        //clear
+        set.clear();
+        System.out.println(set);
     }
 }

@@ -6,9 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @ClassName PatternTest
  * @Description java.util.regex.pattern各种方法的实例
- * @Author Li Anjun
  * @Date 2020/7/15  10:28
  **/
 public class PatternTest {
@@ -90,6 +88,13 @@ public class PatternTest {
         while (matcher2.find()){
             System.out.println(matcher2.group()+"位置："+matcher2.start()+","+matcher2.end());
         }
-
+    }
+    @Test
+    public void lognameTest(){
+        Pattern pattern = Pattern.compile("[0-9]{8}");
+        Matcher match = pattern.matcher("ATG.TradeServer_rankdata_20200812.log");
+        while (match.find()) {
+            System.out.println(match.group());
+        }
     }
 }

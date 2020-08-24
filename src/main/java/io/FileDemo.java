@@ -8,11 +8,9 @@ import java.net.URI;
 import java.nio.file.Path;
 
 /**
- * @ClassName FileDemo
  * @Description java.io.File各种方法的示例
- *              有的方法是可以直接执行的，示例中得到输出值并在控制台输出只是为了验证方法有没有执行成功
- *              File     文件和目录路径名的抽象表示。
- * @Author Li Anjun
+ * 有的方法是可以直接执行的，示例中得到输出值并在控制台输出只是为了验证方法有没有执行成功
+ * File     文件和目录路径名的抽象表示。
  * @Date 2020/7/17  9:45
  **/
 public class FileDemo {
@@ -67,5 +65,24 @@ public class FileDemo {
 
         //toURI()        URI    返回一个URI
         URI uri = file.toURI();
+
+        //listFiles()   返回包含目录中所有文件的路径名的数组
+        File file2 = new File("E:\\img");
+        File[] files = file2.listFiles();
+        //三级目录，获取里面所有文件的路径
+        for (File f : files) {
+            System.out.println(f);
+
+            File[] files1 = f.listFiles();
+            for(File f2:files1){
+                System.out.println(f2);
+
+                File[] files2 = f2.listFiles();
+                for (File f3:files2){
+                    System.out.println(f3);
+                }
+            }
+        }
+
     }
 }

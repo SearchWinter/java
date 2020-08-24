@@ -1,8 +1,6 @@
 package generics;
 
-import sun.rmi.runtime.Log;
 
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 /**
  * @ClassName GenericsFruit
