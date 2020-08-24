@@ -12,7 +12,6 @@ import org.elasticsearch.common.document.DocumentField;
 import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.junit.Test;
 
-import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.util.Map;
 
