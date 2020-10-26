@@ -16,6 +16,7 @@ public class Demo1 {
                 "root", "123456");
         Connection connection = ds.getConnection();
 
+        ds.close();
         connection.close();
     }
 }

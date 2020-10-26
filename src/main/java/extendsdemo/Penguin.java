@@ -1,9 +1,7 @@
 package extendsdemo;
 
 /**
- * @ClassName Penguin
  * @Description TODO
- * @Author Li Anjun
  * @Date 2020/7/1  9:46
  **/
 public  class Penguin extends Animal {

@@ -3,9 +3,7 @@ package extendsdemo;
 import java.util.List;
 
 /**
- * @ClassName Animal
  * @Description 继承测试案例，多重继承
- * @Author Li Anjun
  * @Date 2020/7/1  9:45
  **/
 public class Animal {

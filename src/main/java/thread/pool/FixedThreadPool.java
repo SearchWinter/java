@@ -1,5 +1,6 @@
 package thread.pool;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -12,23 +13,28 @@ public class FixedThreadPool {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
 
-        //循环10次，创建了10个线程，但是线程池大小为3，
-        for (int i = 0; i <10 ; i++) {
-            final int index=i;
-            fixedThreadPool.submit(new Runnable() {
-                @Override
-                public void run() {
-                    System.out.println(Thread.currentThread().getName()+"  "+index);
-                    try {
-                        Thread.sleep(3*1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+        fixedThreadPool.execute(new Task());
+        fixedThreadPool.execute(new Task());
+        fixedThreadPool.execute(new longTask());
+
+        // 阻塞队列
+        for (int i = 0; i <100 ; i++) {
+            fixedThreadPool.execute(new Task());
         }
 
-        fixedThreadPool.shutdown();
-        fixedThreadPool.awaitTermination(2, TimeUnit.SECONDS);
+
+//        fixedThreadPool.shutdown();
+//        fixedThreadPool.awaitTermination(2,TimeUnit.SECONDS);
+
+        //返回未执行的任务列表
+        List<Runnable> runnables = fixedThreadPool.shutdownNow();
+        System.out.println(runnables.size());
+//        System.out.println(runnables);
+
+        //返回Boolean值    每隔1秒钟监测一次线程池的关闭情况,判断线程池中是否还有继续运行的线程
+        while(!fixedThreadPool.awaitTermination(2, TimeUnit.SECONDS)){
+            System.out.println("线程池没有关闭");
+        }
+        System.out.println("线程池已经关闭");
     }
 }

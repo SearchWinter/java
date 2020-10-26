@@ -11,7 +11,7 @@ import org.elasticsearch.client.RestHighLevelClient;
 public class Utils {
     //得到Es的客户端
     public static RestHighLevelClient getClient(){
-        HttpHost httpHost = new HttpHost("172.16.8.124", 9200);
+        HttpHost httpHost = new HttpHost("172.16.9.174", 9200);
         RestHighLevelClient restHighLevelClient = new RestHighLevelClient(
                 RestClient.builder(
                         /** 可以有多个ES连接*/

@@ -1,4 +1,4 @@
-package javaapi.documentapi;
+package javaapi.documentapi.bulk;
 
 
 import javaapi.Utils;

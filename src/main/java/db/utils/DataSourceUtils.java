@@ -16,6 +16,7 @@ public class DataSourceUtils {
         prop.setProperty("username", username);     //用户名
         prop.setProperty("password", password);     //密码
         prop.setProperty("driverClassName", "com.mysql.jdbc.Driver");       //驱动类名
+//        prop.setProperty("driverClassName","com.mysql.cj.jdbc.Driver");        //mysql-connector-java 版本较高时使用
 
         prop.setProperty("validationQuery", "select 1 ");       //校验连接池中的sql语句
         prop.setProperty("testOnBorrow", "true");       //从连接池中引用前是否验证，默认为true

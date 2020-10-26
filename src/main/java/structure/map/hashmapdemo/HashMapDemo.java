@@ -25,6 +25,7 @@ public class HashMapDemo {
         hashMap.put(1,"tutorials");
         hashMap.put(2,"from");
         hashMap.put(3,"java2s.com");
+        hashMap.put(1,"tutorials2");
         //key如果不存在就添加，存在就不操作
         hashMap.putIfAbsent(1,"web");
         hashMap.putIfAbsent(4,"world");

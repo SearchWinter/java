@@ -1,9 +1,7 @@
 package extendsdemo;
 
 /**
- * @ClassName Dog
  * @Description 验证一个类可以被多个类继承
- * @Author Li Anjun
  * @Date 2020/7/1  11:40
  **/
 public class Dog extends Animal {

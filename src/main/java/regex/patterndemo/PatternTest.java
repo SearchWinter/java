@@ -1,6 +1,6 @@
 package regex.patterndemo;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,10 +15,10 @@ public class PatternTest {
  *  尝试对整个目标字符串进行匹配，也就是说只有整个目标字段完全匹配时才会返回true
  *  */
     @Test
-    public static void matchesTest(){
+    public  void matchesTest(){
         String s="aawwssiijj123fsf";
         //只匹配到了数字，返回false
-        System.out.println(Pattern.matches("\\d*",s));
+        System.out.println(Pattern.matches("\\d{3,}",s));
         //匹配字母数字下划线，整个字段都匹配到了，返回true
         String s1="aawwssiijj123fsf";
         System.out.println(Pattern.matches("\\w*",s1));
@@ -28,7 +28,7 @@ public class PatternTest {
      *  创建匹配器，它将根据此模式匹配给定的输入。
      * */
     @Test
-    public static void matcherTest(){
+    public  void matcherTest(){
         String input="java hello java scala";
         Pattern pattern = Pattern.compile("java");
         Matcher match = pattern.matcher(input);

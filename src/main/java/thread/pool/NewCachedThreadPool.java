@@ -5,22 +5,20 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Description ToDO
+ * @Description
+ * newCachedThreadPool 创建一个可缓存线程池(Integer.MAX_VALUE);当执行第二个任务时第一个任务已经完成，会复用执行第一个任务的线程，而不用每次新建线程。
  * @Date 2020/8/20  23:36
  **/
 public class NewCachedThreadPool {
     public static void main(String[] args) throws InterruptedException {
-        long start=System.currentTimeMillis();
         ExecutorService service = Executors.newCachedThreadPool();
+
         System.out.println("******newCachedThreadPool*******");
         for (int i = 0; i <4 ; i++) {
-            TPoolDemo tPoolDemo = new TPoolDemo(i);
+            Task tPoolDemo = new Task();
             service.execute(tPoolDemo);
         }
-//        service.shutdownNow();
+        service.shutdown();
         service.awaitTermination(10, TimeUnit.SECONDS);
-        long end=System.currentTimeMillis();
-        System.out.println(end-start);
-//        "https://my.oschina.net/sdlvzg/blog/2222136"
     }
 }

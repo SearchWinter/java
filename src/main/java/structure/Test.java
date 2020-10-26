@@ -1,6 +1,7 @@
 package structure;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @Description TODO
@@ -13,11 +14,16 @@ public class Test {
         String[] strings={"var1","var2","var3"};
         System.out.println();
 
-        /** list重新了toString方法*/
+        /** list重写了toString方法*/
         ArrayList<String> list = new ArrayList<>();
         list.add("var1");
         list.add("var2");
 //        String string = list.toString();
         System.out.println(list);
+    }
+
+    public Boolean test(HashMap<String,Integer> hashMap){
+
+        return true;
     }
 }

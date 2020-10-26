@@ -23,7 +23,7 @@ public class ArrayListDemo {
         arrlist.add(30);
         arrlist.add(10);
         ArrayList<Integer> anotherlist = new ArrayList<>(arrlist);
-
+        System.out.println(anotherlist);
         //添加元素
         list.add(1);
         list.add(2);

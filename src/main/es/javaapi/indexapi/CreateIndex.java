@@ -29,9 +29,24 @@ public class CreateIndex {
         //不存在就创建索引
         if (!exists) {
             CreateIndexRequest createIndex = new CreateIndexRequest(indexName);
+            //索引的相关设置
             createIndex.settings(Settings.builder()
-                    .put("index.number_of_shards", 10)
-                    .put("index.number_of_replicas", 0)
+                    .put("index.number_of_shards", 20)      //分片数
+                    .put("index.number_of_replicas", 0)     //分片副本数，默认1
+                    .put("refresh_interval",TimeValue.timeValueSeconds(20))         //刷新间隔，默认1s，-1禁用
+                    .put("max_result_window",50000)     // from+size 最大值，默认10000
+                    .put("index.translog.durability","async")
+                    .put("index.translog.sync_interval",TimeValue.timeValueSeconds(20))
+                    .put("index.translog.flush_threshold_size","50mb")
+                    .put("index.search.slowlog.threshold.query.warn",TimeValue.timeValueSeconds(10))
+                    .put("index.search.slowlog.threshold.query.info",TimeValue.timeValueSeconds(5))
+                    .put("index.search.slowlog.threshold.query.debug",TimeValue.timeValueSeconds(2))
+                    .put("index.search.slowlog.threshold.query.trace",TimeValue.timeValueMillis(500))
+                    .put("index.search.slowlog.threshold.fetch.warn",TimeValue.timeValueSeconds(1))
+                    .put("index.search.slowlog.threshold.fetch.info",TimeValue.timeValueMillis(800))
+                    .put("index.search.slowlog.threshold.fetch.debug",TimeValue.timeValueMillis(500))
+                    .put("index.search.slowlog.threshold.fetch.trace",TimeValue.timeValueMillis(200))
+                    .put("index.search.slowlog.level","info")
             );
             //连接到es节点的超时时间
             createIndex.setMasterTimeout(TimeValue.timeValueSeconds(30));

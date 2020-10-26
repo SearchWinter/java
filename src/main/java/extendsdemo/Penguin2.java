@@ -1,11 +1,9 @@
 package extendsdemo;
 
 /**
- * @ClassName Penguin2
  * @Description 多重继承
  * Animal里面的eat()方法被重写了，在penguin2里面怎么调用Animal里面的eat()方法
  * 只能在父类里面将第一个父类的eat() 包装成一个新的feat()方法，然后再调用feat()方法
- * @Author Li Anjun
  * @Date 2020/7/1  9:47
  **/
 public class Penguin2 extends Penguin {

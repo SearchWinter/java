@@ -45,5 +45,10 @@ public class Test {
         String str2=Integer.toString(num6);
 //        String str2=String.valueOf(num6);
 
+        /** 0x 表示十六进制*/
+        // 无符号右移。无论是正数还是负数，高位通通补0
+        // 1111 1111 1111 1111 1111 1111 1111 1111
+        int nBit = (0xFFFFFFFF >>> (32 - 3));
+        System.out.println(nBit);
     }
 }
