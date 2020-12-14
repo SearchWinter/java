@@ -3,6 +3,9 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.spark.SparkContext;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -191,5 +194,11 @@ public class Utils {
         return "";
     }
 
-
+    /** md5*/
+    public static String getDocId(String  idString) throws NoSuchAlgorithmException {
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        md5.update(idString.getBytes());
+        String md5Code = new BigInteger(1, md5.digest()).toString(16);
+        return md5Code;
+    }
 }
