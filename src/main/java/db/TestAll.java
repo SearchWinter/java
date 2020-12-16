@@ -2,6 +2,7 @@ package db;
 
 
 import db.utils.DataSourceUtils;
+import db.utils.Utils;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.junit.After;
@@ -22,7 +23,7 @@ public class TestAll {
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         ds = DataSourceUtils.createDataSource(
-                "jdbc:mysql://172.16.8.137:3306/db_es_taf_stat_md?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=UTF-8",
+                "jdbc:mysql://x.x.x.x:3306/db_es_taf_stat_md?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=UTF-8",
                 "root", "123456");
     }
 
@@ -97,4 +98,14 @@ public class TestAll {
      * 2020-11-24 15:05:08.0
      */
 
+    /** 测试DriverManger.getConnection */
+    @Test
+    public void testGetConnection() throws SQLException {
+        String dbUrl="jdbc:mysql://*.*.*.*:3306/db_z_jiang";
+        String dbUser="root";
+        String dbPwd="123456";
+        Connection connection = Utils.getConnection(dbUrl, dbUser, dbPwd);
+
+        connection.close();
+    }
 }

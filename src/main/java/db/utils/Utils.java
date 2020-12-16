@@ -10,8 +10,17 @@ import java.util.List;
  * @Date 2020/9/1  12:35
  **/
 public class Utils {
-    //判断表是否存在。
-    public Boolean isTableExist(String sTableName, Connection connection) throws Exception {
+
+    /** 使用Java自带的工具得到connection*/
+    public static Connection getConnection(String dbUrl,String dbUser,String dbPwd) throws SQLException {
+        Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPwd);
+        return connection;
+    }
+
+    /**
+     * 判断表是否存在
+     */
+    public static Boolean isTableExist(String sTableName, Connection connection) throws Exception {
         //得到数据库元数据
         DatabaseMetaData dbms = connection.getMetaData();
         ResultSet rs = dbms.getTables(null, null, sTableName, new String[]{"TABLE"});
@@ -49,7 +58,7 @@ public class Utils {
     }
 
     //创建表
-    public void createTable(String sTableName,Connection connection) throws Exception {
+    public static void createTable(String sTableName,Connection connection) throws Exception {
         if (isTableExist(sTableName,connection)) {
             return;
         }
