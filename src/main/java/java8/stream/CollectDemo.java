@@ -18,7 +18,7 @@ public class CollectDemo {
         List<String> collect = list.stream().collect(Collectors.toList());
         System.out.println(collect);
 
-        /** Collectors.toSet()  转换为Set集合*/
+        /** Collectors.toSet()  转换为Set集合,会去重*/
         Set<String> set = list.stream().collect(Collectors.toSet());
         System.out.println(set);
 

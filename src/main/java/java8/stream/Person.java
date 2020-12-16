@@ -7,6 +7,7 @@ public class Person {
     private String name;
     private int age;
     private String address;
+    private int salary;
 
     public Person() {
     }
@@ -15,6 +16,21 @@ public class Person {
         this.name = name;
         this.age = age;
         this.address = address;
+    }
+
+    public Person(String name, int age, String address, int salary) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.salary = salary;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     public String getName() {
@@ -47,6 +63,7 @@ public class Person {
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", address='" + address + '\'' +
+                ", salary=" + salary +
                 '}';
     }
 }
