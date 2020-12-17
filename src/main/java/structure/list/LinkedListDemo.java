@@ -1,11 +1,12 @@
 package structure.list;
 
+import org.apache.calcite.runtime.Like;
+
 import java.util.*;
 
 /**
- * @ClassName LinkedListDemo
  * @Description LinkedList https://docs.oracle.com/javase/8/docs/api/
- * @Author Li Anjun
+ *
  * @Date 2020/7/3  15:01
  **/
 public class LinkedListDemo {
@@ -25,44 +26,53 @@ public class LinkedListDemo {
         Linkedlist.add(20);
         Linkedlist.add(10);
         Linkedlist.add(30);
-/*        System.out.println(Linkedlist);
-        Object[] objects = Linkedlist.toArray();
+        Linkedlist.add(22);
+        System.out.println("起始："+Linkedlist);
+        /*Object[] objects = Linkedlist.toArray();
         System.out.println(Arrays.toString(objects));*/
 
-        //addFirst()  在第一个位置添加元素
+        /** addFirst()  在第一个位置添加元素*/
 //        Linkedlist.addFirst(1000);
 
-        //addLast()    在最后一个位置添加元素
+        /** addLast()   在最后一个位置添加元素*/
 //        Linkedlist.addLast(2000);
 
-        //clear()       清空所有的元素
+        /** clear()     清空所有的元素*/
 //        Linkedlist.clear();
 
-        //clone()       克隆链表
-        /*LinkedList<Object> list = new LinkedList<>();
-        list=(LinkedList<Object>) Linkedlist.clone();*/
+        /** clone()     克隆链表*/
+        LinkedList<Object> list = new LinkedList<>();
+        list = (LinkedList<Object>) Linkedlist.clone();
 
-        //contains      验证元素在链表中是否存在
+        /** contains    验证元素在链表中是否存在*/
 //        System.out.println(Linkedlist.contains(null));
 
-        //descendingIterator  得到一个反序的迭代器
-/*        Iterator<Integer> iterator = Linkedlist.descendingIterator();
+        /** descendingIterator      得到一个反序的迭代器 它自己的方法*/
+        Iterator<Integer> iterator = Linkedlist.descendingIterator();
+/*
         while (iterator.hasNext()){
             System.out.println(iterator.next());
-        }*/
+        }
+*/
 
-        //size()        得到链表里面元素的个数
+        /** size()        得到链表里面元素的个数*/
 //        Linkedlist.size();
 
-        //第一种：自定义一个ComparatorNum比较器 升序，里面的元素不能够有Null
-       /* Collections.sort(Linkedlist,new ComparatorNum() );
-        System.out.println(Linkedlist);*/
 
-        //第二种：使用Collections里面的方法
-//       Collections.sort(Linkedlist,Collections.reverseOrder());       //降序
-//        Collections.sort(Linkedlist);             //升序
+        /** 第一种：自定义一个ComparatorNum比较器 升序，里面的元素不能够有Null*/
+/*        Collections.sort(Linkedlist,new ComparatorNum() );
+        System.out.println("自定义比较器："+Linkedlist);*/
 
-        //去除链表里面所有的空值
+        /** 第二种：使用Collections里面的方法*/
+        //降序
+//       Collections.sort(Linkedlist,Collections.reverseOrder());
+        //升序
+//        Collections.sort(Linkedlist);
+
+        /** get()   获取指定位置的值
+         *  set()   给指定位置重新赋值
+         *  remove()    移除指定位置的值
+         * 去除链表里面所有的空值*/
 /*        Linkedlist.add(null);
         for (int i=0;i<Linkedlist.size();i++){
             if (Linkedlist.get(i)==null){
@@ -82,31 +92,45 @@ public class LinkedListDemo {
         }
         System.out.println(sum);*/
 
-        //peek()  peekFirst()  检索列表的第一个元素
+        /************** Queue operations  ********/
+
+        /** peek()  检索列表的第一个元素*/
 //        System.out.println(Linkedlist.peek());
 
-        //peekLast()        检索列表的最后一个元素
-//        System.out.println(Linkedlist.peekLast());
+        /** peekFirst()  peekLast()  检索列表的第一/最后一个元素
+         * 如果列表为空的话，就返回null*/
+/*        LinkedList<Integer> list1=new LinkedList<>();
+        System.out.println(list1.peekFirst());
+        System.out.println(list1.peekLast());*/
 
-        //poll() pollFirst()       检索并移除列表的第一个元素
-//        System.out.println(Linkedlist.poll());
+        /** element()   返回列表的第一元素
+         *  如果列表为空的话，抛出 NoSuchElementException
+         * */
+/*        System.out.println(Linkedlist.element());
+        LinkedList<Integer> listElement=new LinkedList<>();
+        System.out.println(listElement.element());*/
 
-        //pollLast()        检索并移除列表的最后一个元素
-//        System.out.println(Linkedlist.pollLast());
+        /** poll()  检索并移除列表的第一个元素*/
+/*        System.out.println("poll(): "+Linkedlist.poll());
+        System.out.println("poll()后："+Linkedlist);*/
 
-        //pop()     从这个列表所表示的堆栈中弹出一个元素。换句话说，删除并返回该列表的第一个元素。
-//        这个列表前面的元素(它是这个列表所表示的堆栈的顶部)
+        /** pollFirst() pollLast() 检索并移除列表的第一/最后个元素
+         * 如果列表为空的话，就返回null*/
+/*        System.out.println(Linkedlist.pollFirst());
+        System.out.println(Linkedlist.pollLast());*/
+
+        /** pop()   删除并返回该列表的第一个元素。*/
         System.out.println(Linkedlist.pop());
 
-
-        System.out.println(Linkedlist);
+        System.out.println("end: "+Linkedlist);
     }
-    static  class ComparatorNum implements Comparator<Integer>{
+
+    static class ComparatorNum implements Comparator<Integer> {
         @Override
         public int compare(Integer o1, Integer o2) {
-            if(o1>o2){
+            if (o1 > o2) {
                 return 1;
-            }else{
+            } else {
                 return -1;
             }
         }
