@@ -36,6 +36,16 @@ public class PatternTest {
             System.out.println(match.group());
         }
     }
+    //匹配多个子字符串
+    @Test
+    public void matcherTest2(){
+        String input="Push.ConnectServer_push_reportrst_20201102.log";
+        Pattern pattern = Pattern.compile("(push_feedback_20)|(push_reportrst_20)");
+        Matcher matcher = pattern.matcher(input);
+        while(matcher.find()){
+      System.out.println(true);
+        }
+    }
 
     /** split(CharSequence input,int limit)         通过将输入分解为该模式的匹配来计算的字符串数组
      *  将给定的字符序列匹配后分割为指定模式

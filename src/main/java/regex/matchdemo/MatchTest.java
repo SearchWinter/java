@@ -1,6 +1,6 @@
 package regex.matchdemo;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -55,11 +55,19 @@ public class MatchTest {
         System.out.println(b1);
     }
 
+    /** 以指定的字符串结尾*/
     @Test
     public void matchsTest(){
-        Pattern pattern = Pattern.compile("foo");
-        Matcher matcher = pattern.matcher("foooooo");
+        Pattern pattern = Pattern.compile(".*log$");
+        Matcher matcher = pattern.matcher("taf_20201224.log");
         boolean b = matcher.matches();
         System.out.println(b);
+    }
+    @Test
+    public void endTest(){
+        String  defaultPageSqlId = "\\w*ByPaging$";
+        System.out.println("dsdsdsdByPaging".matches(defaultPageSqlId));
+
+        System.out.println("fdsfsf.log".matches("\\w*log$"));
     }
 }
