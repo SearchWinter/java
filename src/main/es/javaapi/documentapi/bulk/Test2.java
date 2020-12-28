@@ -49,7 +49,10 @@ public class Test2 {
         client.close();
     }
 
-    /** 复现插入es中的时间少8小时的问题*/
+    /** 复现插入es中的时间少8小时的问题
+     * jvm默认使用系统的时区，而es中的时间都是UTC(世界协调时间) 0时区，所以少了8小时
+     * java.utils.date可以直接存入es,java.sql.date要先转换为java.utils.date才能存入
+     * */
     @Test
     public void timeDemo() throws IOException, ParseException {
         HttpHost httpHost = new HttpHost("172.16.8.156", 9200);
@@ -57,13 +60,12 @@ public class Test2 {
                 RestClient.builder(httpHost)
         );
         IndexRequest indexRequest = new IndexRequest("time_demo3");
-        Map<String, Date> dateMap = new HashMap<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date parse = dateFormat.parse("2020-12-28");
         indexRequest.source("date",parse).id("1");
         client.index(indexRequest,RequestOptions.DEFAULT);
         client.close();
     }
-    //es中存放的时间
+    //es中存放的时间，都会转换为下面这种格式
     //2020-12-27T16:00:00.000Z
 }
