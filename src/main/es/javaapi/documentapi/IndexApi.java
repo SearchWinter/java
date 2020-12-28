@@ -17,7 +17,7 @@ import java.util.Date;
 public class IndexApi {
     public static void main(String[] args) throws IOException {
         RestHighLevelClient restHighLevelClient = Utils.getClient();
-        //构建indexRequest
+        /** 构建indexRequest，可以指定id*/
         IndexRequest indexRequest = new IndexRequest("logger").id("1");
         //数据源
         indexRequest.source(
