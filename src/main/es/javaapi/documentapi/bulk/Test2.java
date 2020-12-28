@@ -5,9 +5,13 @@ import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.junit.Test;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -44,4 +48,22 @@ public class Test2 {
         System.out.println("程序执行时间："+(System.currentTimeMillis()-start2));
         client.close();
     }
+
+    /** 复现插入es中的时间少8小时的问题*/
+    @Test
+    public void timeDemo() throws IOException, ParseException {
+        HttpHost httpHost = new HttpHost("172.16.8.156", 9200);
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(httpHost)
+        );
+        IndexRequest indexRequest = new IndexRequest("time_demo3");
+        Map<String, Date> dateMap = new HashMap<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parse = dateFormat.parse("2020-12-28");
+        indexRequest.source("date",parse).id("1");
+        client.index(indexRequest,RequestOptions.DEFAULT);
+        client.close();
+    }
+    //es中存放的时间
+    //2020-12-27T16:00:00.000Z
 }
