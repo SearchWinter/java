@@ -1,12 +1,16 @@
 package javaapi.indexapi;
 
 import javaapi.Utils;
+import org.apache.http.HttpHost;
 import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.common.xcontent.XContentType;
+import org.junit.Test;
 
 import java.io.IOException;
 
@@ -20,7 +24,7 @@ public class CreateIndex {
     public static void main(String[] args) throws IOException {
         RestHighLevelClient client = Utils.getClient();
         //索引名称必须都是小写
-        String indexName="twitter";
+        String indexName="twitter2_demo";
 
         //判断索引是否存在
         GetIndexRequest getIndexRequest = new GetIndexRequest(indexName);
@@ -31,13 +35,22 @@ public class CreateIndex {
             CreateIndexRequest createIndex = new CreateIndexRequest(indexName);
             //索引的相关设置
             createIndex.settings(Settings.builder()
-                    .put("index.number_of_shards", 20)      //分片数
-                    .put("index.number_of_replicas", 0)     //分片副本数，默认1
-                    .put("refresh_interval",TimeValue.timeValueSeconds(20))         //刷新间隔，默认1s，-1禁用
-                    .put("max_result_window",50000)     // from+size 最大值，默认10000
+                    //分片数
+                    .put("index.number_of_shards", 20)
+                    //分片副本数，默认1。初次导入数据时设为0，加快写入速度
+                    .put("index.number_of_replicas", 0)
+                    // from+size 最大值，默认10000
+                    .put("max_result_window",50000)
+
+                    //调优参数
+                    //刷新间隔，默认1s，-1禁用
+                    .put("refresh_interval",TimeValue.timeValueSeconds(120))
                     .put("index.translog.durability","async")
-                    .put("index.translog.sync_interval",TimeValue.timeValueSeconds(20))
                     .put("index.translog.flush_threshold_size","50mb")
+                    .put("index.translog.sync_interval",TimeValue.timeValueSeconds(120))
+                    .put("thread_pool.write.size",8)
+                    .put("thread_pool.write.queue_size",1000)
+
                     .put("index.search.slowlog.threshold.query.warn",TimeValue.timeValueSeconds(10))
                     .put("index.search.slowlog.threshold.query.info",TimeValue.timeValueSeconds(5))
                     .put("index.search.slowlog.threshold.query.debug",TimeValue.timeValueSeconds(2))
@@ -52,6 +65,68 @@ public class CreateIndex {
             createIndex.setMasterTimeout(TimeValue.timeValueSeconds(30));
             client.indices().create(createIndex, RequestOptions.DEFAULT);
         }
+        client.close();
+    }
+
+    /** 创建索引时，指定映射*/
+    @Test
+    public void testMapping() throws IOException {
+        HttpHost httpHost = new HttpHost("172.16.8.156", 9200);
+        RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(httpHost));
+        String indexName="mapping-test";
+        CreateIndexRequest createIndexRequest = new CreateIndexRequest(indexName);
+
+        createIndexRequest.settings(Settings.builder()
+//                .put()
+        );
+        String str ="{ \"settings\" : {\n" +
+                "        \"index\" : {\n" +
+                "            \"number_of_shards\" : 5, \n" +
+                "            \"number_of_replicas\" : 0 ,\n" +
+                "            \"refresh_interval\":\"10s\",\n" +
+                "            \"translog.durability\":\"async\",\n" +
+                "            \"translog.sync_interval\": \"20s\",\n" +
+                "            \"translog.flush_threshold_size\":\"50mb\"\n" +
+                "        }\n" +
+                "    },\n" +
+                "  \"mappings\": {\n" +
+                "      \"properties\": {\n" +
+                "        \"stattime\": {\n" +
+                "          \"type\":  \"date\"\n" +
+                "        },\n" +
+                "       \"f_date\": {\n" +
+                "          \"type\":  \"date\"\n" +
+                "        },\n" +
+                "       \"f_tflag\": {\n" +
+                "          \"type\":  \"text\",\n" +
+                "          \"fields\":{\n" +
+                "          \t\"keyword\":{\n" +
+                "          \t\t\"type\":\"keyword\"\n" +
+                "          \t}\n" +
+                "          },\n" +
+                "          \"index\": \"true\",\n" +
+                "          \"analyzer\": \"keyword\",\n" +
+                "          \"search_analyzer\": \"keyword\",\n" +
+                "          \"fielddata\": true   \n" +
+                "        },\n" +
+                "        \"slave_port\":{\n" +
+                "        \t\"type\":\"integer\",\n" +
+                "        \t\"index\":\"true\"\n" +
+                "        },\n" +
+                "        \"total_time\":{\n" +
+                "        \t\"type\":\"long\",\n" +
+                "        \t\"index\":\"true\"\n" +
+                "        }\n" +
+                "    }\n" +
+                "  }\n" +
+                "}";
+
+        createIndexRequest.mapping(
+                str,
+                XContentType.JSON
+
+        );
+        client.indices().create(createIndexRequest,RequestOptions.DEFAULT);
         client.close();
     }
 }

@@ -16,7 +16,9 @@ public class DeleteIndex {
     public static void main(String[] args) throws IOException {
         RestHighLevelClient client = Utils.getClient();
 
-        DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest("twitter");
+//        DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest("twitter");
+        //可以使用通配符
+        DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest("twitt*_demo");
 
         client.indices().delete(deleteIndexRequest, RequestOptions.DEFAULT);
 
