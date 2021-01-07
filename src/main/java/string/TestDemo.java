@@ -1,5 +1,6 @@
 package string;
 
+import jodd.util.StringUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
@@ -93,5 +94,38 @@ public class TestDemo {
     System.out.println(trim);
     System.out.println("str length: "+str.length());
     System.out.println("trim length:"+trim.length());
+  }
+
+  /** contains()判断一个字符串是否包含某个字符串
+   * 方法返回true，当且仅当此字符串包含指定的char值序列*/
+  @Test
+  public void containsTest(){
+    String logName="_taf_._trace___t_trace__20201225.log";
+    boolean contains = logName.contains("20201225");
+    System.out.println(contains);
+  }
+
+  /** equals()  比较字符串*/
+  @Test
+  public void emptyTest(){
+    String str="";
+    System.out.println("".equals(""));
+    System.out.println(str==null);
+  }
+
+  /** 使用已有的方法判断空值情况*/
+  @Test
+  public void emptyTest2(){
+    String str1="";
+    while(StringUtil.isEmpty(str1)){
+
+    }
+  }
+
+  /** equalsIgnoreCase() 比较字符串，并忽略大小写*/
+  @Test
+  public void equalsTest2(){
+    String str="java";
+    System.out.println("JAVA".equalsIgnoreCase(str));
   }
 }
