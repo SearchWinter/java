@@ -1,6 +1,9 @@
 package structure.map.hashmapdemo;
 
+import org.junit.Test;
+
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.BiFunction;
 
 /**
@@ -83,5 +86,30 @@ public class HashMapDemo {
 
         System.out.println(hashMap.size());
 
+    }
+
+    /** getOrDefault()
+     *  指定key值，如果不能够从map中得到数据，就使用默认值
+     * */
+    @Test
+    public void testDefaule(){
+        Map<String,String> map = new HashMap<>();
+        map.put("demo","java");
+        map.put("demo2",null);
+        map.put("demo3","");
+        System.out.println("String:"+map.getOrDefault("demo", "default"));
+        System.out.println("null:"+map.getOrDefault("demo2","nullValue"));
+        System.out.println("empty:"+map.getOrDefault("demo3","emptyValue"));
+        System.out.println("orDefault:"+map.getOrDefault("demo4","defaultValue"));
+    }
+
+    /** 指定类型为Object，就可以保存不同类型的数据到同一map中*/
+    @Test
+    public void testObject(){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name","tom");
+        map.put("age",20);
+        map.put("address","WUHAN");
+        System.out.println(map);
     }
 }
