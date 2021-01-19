@@ -68,6 +68,21 @@ public class MatchTest {
         String  defaultPageSqlId = "\\w*ByPaging$";
         System.out.println("dsdsdsdByPaging".matches(defaultPageSqlId));
 
-        System.out.println("fdsfsf.log".matches("\\w*log$"));
+        System.out.println("fdsfsf.log".matches(".*log$"));
+
+        boolean matches = Pattern.matches(".*log$", "demo.log");
+        System.out.println(matches);
+    }
+
+    /** 拼接正则表达式*/
+    @Test
+    public void testStr(){
+        String date="20201229";
+        String regex=".*"+date+".log$";
+        boolean matches = Pattern.matches(regex, "_taf_._trace___t_trace__20201229.log");
+        System.out.println(matches);
+
+        boolean matches1 = "20201229.log".matches(regex);
+        System.out.println(matches1);
     }
 }
