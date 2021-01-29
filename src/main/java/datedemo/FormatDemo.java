@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @Description
@@ -53,7 +56,7 @@ public class FormatDemo {
         return list;
     }
     /**
-     * 将时间戳转换为指定格式的时间
+     * 将时间戳转换为指定格式的字符串  long->String
      * SimpleDateFormat类的format()方法
      */
     @Test
@@ -81,7 +84,16 @@ public class FormatDemo {
      * */
     public void dateFormat2() throws ParseException {
         SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
-        long time = sdf.parse("2020-09-20").getTime();
+        Date date = sdf.parse("20200920");
+        long time = date.getTime();
+    System.out.println(time);
+    }
+    @Test
+    public void dateFormat3() throws ParseException {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = sdf.parse("2020-12-02 23:22:23");
+        long time = date.getTime();
+        System.out.println(time);
     }
 
     @Test
@@ -99,5 +111,74 @@ public class FormatDemo {
         System.out.println(s);
     }
 
+    @Test
+    public void test(){
+        System.out.println(new Date());
+    }
+    //output
+    //Mon Dec 28 10:47:34 CST 2020
 
+    /** 东八区时间转换为0时区
+     * JVM默认情况下获取的就是操作系统的时区设置
+     * GMT:格林威治标准时间
+     * UTC:世界协调时间
+     * DST:夏日节约时间
+     * CST:中国标准时间
+     * **/
+    @Test
+    public void testZoneA() throws ParseException {
+        String dateStr="2020-12-28 08:00:00";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //解析字符串，时区：东八时区
+        Date date = format.parse(dateStr);
+        System.out.println(date.getTime());
+        //格式化日期 0时区
+        //设置时区
+        format.setTimeZone(TimeZone.getTimeZone("GMT"));
+        System.out.println(format.format(date));
+    }
+    //output
+    //1609113600000
+    //2020-12-28 00:00:00
+
+    /** 带时区转换*/
+    @Test
+    public void testZoneB() throws ParseException {
+        String dateStr="2020-12-28 10:00:00+0800";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
+        //解析字符串，时区：东八区
+        Date date = dateFormat.parse(dateStr);
+        //格式化日期，时区：0时区
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        System.out.println(dateFormat.format(date));
+    }
+    //output
+    //2020-12-28 02:00:00+0000
+
+    @Test
+    public void testZoneC() throws ParseException {
+        String dateStr="2020-12-28 11:00:00";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        Date date = dateFormat.parse(dateStr);
+        System.out.println(date);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        System.out.println(dateFormat.format(date));
+    }
+
+    @Test
+    public void testFormat(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        String format = dateFormat.format(new Date());
+        System.out.println(format);
+    }
+
+    @Test
+    public void testFormat2() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
+        String str1="20210128";
+        String str2="2360";
+        Date parse = format.parse(str1 + str2);
+        System.out.println(parse);
+    }
 }
