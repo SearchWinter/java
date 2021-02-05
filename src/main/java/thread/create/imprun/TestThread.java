@@ -1,4 +1,4 @@
-package thread.imprun;
+package thread.create.imprun;
 
 /** 通过一个Runnable实例来创建*/
 public class TestThread{

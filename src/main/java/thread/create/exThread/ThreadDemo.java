@@ -1,4 +1,4 @@
-package thread.exThread;
+package thread.create.exThread;
 
 /**
  * @Description 通过继承Thread来创建线程

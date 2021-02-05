@@ -50,6 +50,20 @@ public class FileChannelDemo {
         }
 
     }
+    @Test
+    public void testEmpty() throws IOException {
+        Path path = Paths.get("data/AT.ATStatServer1_HSProxyHATestServer_report_20210125.log");
+        FileChannel open = FileChannel.open(path, StandardOpenOption.READ);
+        BufferedReader bufReader = new BufferedReader(Channels.newReader(open, "utf-8"));
+        String line = "";
+        do {
+            //读到最后的时候回返回NULL
+            line = bufReader.readLine();
+            if (StringUtils.isNotEmpty(line)) {
+                System.out.println(line);
+            }
+        } while (line!=null);
+    }
 
     /**
      * 通过notepad++改变文件的编码格式，尝试读取文件内容
@@ -57,22 +71,27 @@ public class FileChannelDemo {
      */
     @Test
     public void testISO() throws IOException {
-        Path path = Paths.get("E:\\iso-8859-1.txt");
-        Path path2 = Paths.get("E:\\utf-demo.txt");
+        Path path = Paths.get("E:\\iso-8859-1.log");
+        Path path2 = Paths.get("E:\\utf-demo.log");
         Path path3 = Paths.get("E:\\项目\\Charset\\ATGSQ.TradeServer_sharedata_20210123.log");
-        FileChannel open = FileChannel.open(path3, StandardOpenOption.READ);
-        String charSetName=getFileCharset(path3);
-        System.out.println(charSetName);
+        Path path4=Paths.get("E:\\项目\\日志查询\\CRM.ContractWebServer_setPdf_20210125.log");
+        FileChannel open = FileChannel.open(path4, StandardOpenOption.READ);
+        String charSetName=getFileCharset(path4);
+        System.out.println("charSetName: "+charSetName);
         if (StringUtils.isEmpty(charSetName)){
             return;
         }
-        BufferedReader bufferedReader = new BufferedReader(Channels.newReader(open, charSetName));
+        BufferedReader bufferedReader = new BufferedReader(Channels.newReader(open, "utf-8"));
 
         String line = null;
-        line = bufferedReader.readLine();
-        while (StringUtils.isNotEmpty(line)) {
-            System.out.println(line);
+        try {
             line = bufferedReader.readLine();
+            while (StringUtils.isNotEmpty(line)) {
+                System.out.println(line);
+                line = bufferedReader.readLine();
+            }
+        }catch (MalformedInputException e){
+            System.out.println("read file fail");
         }
     }
 
@@ -116,5 +135,25 @@ public class FileChannelDemo {
         System.out.println(charset);
     }
 
+    /**
+     * 添加position后文件无法读取
+     * */
+    @Test
+    public void testPosition() throws IOException {
+        Path path = Paths.get("E:\\项目\\日志查询\\AI.DakaWebServer_cache_20210125.log");
+        FileChannel open = FileChannel.open(path, StandardOpenOption.READ);
+        FileChannel open2 = FileChannel.open(path, StandardOpenOption.READ);
+        String charSetName=getFileCharset(path);
+        System.out.println(charSetName);
+//        open.position(2274096);
+        open.position(2274099);
+        BufferedReader bufferedReader = new BufferedReader(Channels.newReader(open, "UTF-8"));
+        BufferedReader bufferedReader2 = new BufferedReader(Channels.newReader(open2, "UTF-8"));
+        for (int i = 0; i <50 ; i++) {
+            System.out.println(bufferedReader.readLine());
+            System.out.println(bufferedReader2.readLine());
+        }
+        open.close();
+    }
 
 }

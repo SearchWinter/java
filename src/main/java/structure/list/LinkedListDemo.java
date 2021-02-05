@@ -1,6 +1,7 @@
 package structure.list;
 
 import org.apache.calcite.runtime.Like;
+import org.junit.Test;
 
 import java.util.*;
 
@@ -60,8 +61,8 @@ public class LinkedListDemo {
 
 
         /** 第一种：自定义一个ComparatorNum比较器 升序，里面的元素不能够有Null*/
-/*        Collections.sort(Linkedlist,new ComparatorNum() );
-        System.out.println("自定义比较器："+Linkedlist);*/
+        Collections.sort(Linkedlist,new ComparatorNum() );
+        System.out.println("自定义比较器："+Linkedlist);
 
         /** 第二种：使用Collections里面的方法*/
         //降序
@@ -134,5 +135,17 @@ public class LinkedListDemo {
                 return -1;
             }
         }
+    }
+
+    /** LinkedList实现了Queue的方法,所以可以当做队列使用
+     * 可以存放重复值，重新了toString()
+     * */
+    @Test
+    public void queue(){
+        Queue<Integer> queue=new LinkedList<>();
+        queue.add(10);
+        queue.add(10);
+        queue.add(20);
+        System.out.println(queue);
     }
 }

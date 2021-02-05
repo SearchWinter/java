@@ -2,6 +2,7 @@ package string;
 
 import jodd.util.StringUtil;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
 /** @Description java.lang.string中某些方法的测试 @Date 2020/8/4 10:32 */
@@ -78,7 +79,8 @@ public class TestDemo {
   public void splitTest(){
     String str1="a|b|c|d|e";
     String str2="a|b|c||";
-    String[] split = str1.split("\\|",2);
+//    String[] split = str1.split("\\|",2);
+    String[] split = str2.split("\\|");
 
     System.out.println("split length:"+split.length);
     for (String string:split){
@@ -94,6 +96,7 @@ public class TestDemo {
     System.out.println(trim);
     System.out.println("str length: "+str.length());
     System.out.println("trim length:"+trim.length());
+    System.out.println("".trim().length());
   }
 
   /** contains()判断一个字符串是否包含某个字符串
@@ -122,10 +125,41 @@ public class TestDemo {
     }
   }
 
+  @Test
+  public void isEmptyTest(){
+    String str="";
+    System.out.println(str.isEmpty());
+    System.out.println(StringUtils.isEmpty(str));
+    System.out.println(str.trim()==null);
+  }
+
   /** equalsIgnoreCase() 比较字符串，并忽略大小写*/
   @Test
   public void equalsTest2(){
     String str="java";
     System.out.println("JAVA".equalsIgnoreCase(str));
+  }
+
+  /** . 分割*/
+  @Test
+  public void test2(){
+    String str="12.12";
+    String[] split = str.split("\\.", -1);
+    for(String str1:split){
+      System.out.println(str1);
+    }
+  }
+
+  /** 字符串拼接的各种方法*/
+  @Test
+  public void testAdd(){
+    String str1="12";
+    String str2="12";
+    System.out.println(str1+"."+str2);
+  }
+  @Test
+  public void testAdd2(){
+    int size=10;
+    String.format("kafka flush size=%d,time=%d", size, System.currentTimeMillis());
   }
 }

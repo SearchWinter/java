@@ -1,5 +1,7 @@
 package structure.list;
 
+import org.junit.Test;
+
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -101,5 +103,16 @@ public class ArrayListDemo {
         Collections.sort(list,Collections.reverseOrder());
         System.out.println(list);
 
+    }
+
+    @Test
+    public void testA(){
+        ArrayList<Integer> list = new ArrayList<>(10);
+        list.add(100);
+        list.add(300);
+        list.add(500);
+        list.add(700);
+        Collections.sort(list);
+        System.out.println(list.get(0));
     }
 }

@@ -7,9 +7,6 @@ import java.util.Date;
 public class BaseTest {
     public static void main(String[] args) {
         int a=10;
-        Date date;
-        date=new Date();
-        date.getDate();
 
         test1(a);
         System.out.println(a);

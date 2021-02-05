@@ -46,17 +46,35 @@ public class FileInputStreamTest {
     @Test
     public void test() throws IOException {
         Path path = Paths.get("E:\\HQPeek.PeekForexServer_debug_20200813.log");
-        FileChannel open = FileChannel.open(path, StandardOpenOption.READ);
+        Path path2 = Paths.get("data/UTF_8.log");
+        FileChannel open = FileChannel.open(path2, StandardOpenOption.READ);
 
         BufferedReader bufReader = new BufferedReader(Channels.newReader(open, "UTF-8"));
 
         bufReader.lines().forEach(line->{
-            String[] split = line.split("|", -1);
-            for (String str:split
-                 ) {
+            String[] split = line.split("\\|", -1);
+            for (String str:split) {
                 System.out.println(str);
             }
         });
+
+    }
+
+    /** skip()  跳过输入流中n个字节的数据
+     *  read() 下一个字节数据的ASCII码 int,如果到了末尾，返回 -1
+     * */
+    @Test
+    public void skipTest() throws IOException, InterruptedException {
+        int i=0;
+        FileInputStream fileInputStream = new FileInputStream("data/input.txt");
+        BufferedInputStream buffer = new BufferedInputStream(fileInputStream);
+        while((i=buffer.read())!=-1){
+            System.out.println(i);
+            char c=(char)i;
+            System.out.println(c);
+            Thread.sleep(2000);
+            buffer.skip(3);
+        }
 
     }
 }

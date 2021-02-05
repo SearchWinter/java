@@ -25,7 +25,7 @@ public class CommonsDbUtils {
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         ds = DataSourceUtils.createDataSource(
-                "jdbc:mysql://172.16.8.137:3306/db_es_taf_stat_md?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false",
+                "jdbc:mysql://*.*.*.*:3306/db_es_taf_stat_md?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false",
                 "root", "123456");
         connection=ds.getConnection();
     }

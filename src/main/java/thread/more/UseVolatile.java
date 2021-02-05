@@ -1,11 +1,11 @@
 package thread.more;
 
-import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
 /**
  * @Description 使用volatile关键字来实现线程间的通信——共享内存
+ * 同一时刻只能由一个线程来修改notice的值.
  * @Date 2020/7/30  14:39
  **/
 public class UseVolatile {

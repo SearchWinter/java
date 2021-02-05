@@ -24,7 +24,7 @@ public class CreateIndex {
     public static void main(String[] args) throws IOException {
         RestHighLevelClient client = Utils.getClient();
         //索引名称必须都是小写
-        String indexName="twitter2_demo";
+        String indexName="cursor-test";
 
         //判断索引是否存在
         GetIndexRequest getIndexRequest = new GetIndexRequest(indexName);
@@ -36,20 +36,18 @@ public class CreateIndex {
             //索引的相关设置
             createIndex.settings(Settings.builder()
                     //分片数
-                    .put("index.number_of_shards", 20)
+                    .put("index.number_of_shards", 5)
                     //分片副本数，默认1。初次导入数据时设为0，加快写入速度
                     .put("index.number_of_replicas", 0)
                     // from+size 最大值，默认10000
-                    .put("max_result_window",50000)
+                    .put("max_result_window",10000)
 
                     //调优参数
                     //刷新间隔，默认1s，-1禁用
-                    .put("refresh_interval",TimeValue.timeValueSeconds(120))
+                    .put("refresh_interval",TimeValue.timeValueSeconds(1))
                     .put("index.translog.durability","async")
                     .put("index.translog.flush_threshold_size","50mb")
                     .put("index.translog.sync_interval",TimeValue.timeValueSeconds(120))
-                    .put("thread_pool.write.size",8)
-                    .put("thread_pool.write.queue_size",1000)
 
                     .put("index.search.slowlog.threshold.query.warn",TimeValue.timeValueSeconds(10))
                     .put("index.search.slowlog.threshold.query.info",TimeValue.timeValueSeconds(5))

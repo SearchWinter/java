@@ -15,30 +15,31 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * @Description TODO
+ * @Description 生成大量的模拟数据
  * @Date 2020/10/19  10:35
  **/
 public class Test2 {
     public static void main(String[] args) throws IOException {
         long start1 =System.currentTimeMillis();
-        HttpHost httpHost = new HttpHost("192.168.8.237", 9200);
+        HttpHost httpHost = new HttpHost("172.16.8.137", 9200);
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(httpHost)
         );
 
         List<Map<String, ?>> list = new ArrayList<Map<String, ?>>();
-        for (int i = 0; i < 10000; i++) {
-            Map<String, String> datas = new HashMap<>();
+        for (int i = 1; i <= 10000; i++) {
+            Map<String, Object> datas = new HashMap<>();
             datas.put("name", "name_" + i);
             datas.put("age", Integer.toString(new Random().nextInt(50)));
             datas.put("sex", Math.round(Math.random()) == 1 ? "男" : "女");
+            datas.put("id",i);
             list.add(datas);
         }
         System.gc();
 
         BulkRequest bulkRequest = new BulkRequest();
         for (int i = 0; i < list.size(); i++) {
-            IndexRequest indexRequest = new IndexRequest("es_test");
+            IndexRequest indexRequest = new IndexRequest("cursor-test");
             indexRequest.source(list.get(i));
             bulkRequest.add(indexRequest);
         }
@@ -55,14 +56,15 @@ public class Test2 {
      * */
     @Test
     public void timeDemo() throws IOException, ParseException {
-        HttpHost httpHost = new HttpHost("172.16.8.156", 9200);
+        HttpHost httpHost = new HttpHost("172.16.8.137", 9200);
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(httpHost)
         );
         IndexRequest indexRequest = new IndexRequest("time_demo3");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date parse = dateFormat.parse("2020-12-28");
-        indexRequest.source("date",parse).id("1");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parse = dateFormat.parse("2020-12-28 12:30:00");
+        String parse2="2020-12-28";
+        indexRequest.source("date",parse2).id("2");
         client.index(indexRequest,RequestOptions.DEFAULT);
         client.close();
     }

@@ -8,8 +8,8 @@ import java.util.concurrent.BlockingQueue;
 public class TaskRunnerProducer implements Runnable {
     public BlockingQueue queue;
 
-    public TaskRunnerProducer(BlockingQueue que) {
-        this.queue = que;
+    public TaskRunnerProducer(BlockingQueue blockingQueue) {
+        this.queue = blockingQueue;
     }
 
     @Override

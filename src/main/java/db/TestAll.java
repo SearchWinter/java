@@ -20,7 +20,6 @@ import java.sql.*;
 public class TestAll {
     private static BasicDataSource ds = null;
 
-    @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         ds = DataSourceUtils.createDataSource(
                 "jdbc:mysql://x.x.x.x:3306/db_es_taf_stat_md?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=UTF-8",
@@ -30,7 +29,6 @@ public class TestAll {
     /**
      * @throws java.lang.Exception
      */
-    @AfterClass
     public static void tearDownAfterClass() throws Exception {
         ds.close();
     }
@@ -101,7 +99,7 @@ public class TestAll {
     /** 测试DriverManger.getConnection */
     @Test
     public void testGetConnection() throws SQLException {
-        String dbUrl="jdbc:mysql://*.*.*.*:3306/db_z_jiang";
+        String dbUrl="jdbc:mysql://172.16.8.137:3306/db_es_taf_trace_log";
         String dbUser="root";
         String dbPwd="123456";
         Connection connection = Utils.getConnection(dbUrl, dbUser, dbPwd);

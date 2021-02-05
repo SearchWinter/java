@@ -1,3 +1,4 @@
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Created by kivenchen on 2016/3/9.
  */
-public class Utils {
+public class SelfUtils {
 
     public static String getBeforeDay(String ds) throws ParseException {
         SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
@@ -195,10 +196,21 @@ public class Utils {
     }
 
     /** md5*/
-    public static String getDocId(String  idString) throws NoSuchAlgorithmException {
+    public static String getMD5(String  idString) throws NoSuchAlgorithmException {
         MessageDigest md5 = MessageDigest.getInstance("MD5");
         md5.update(idString.getBytes());
         String md5Code = new BigInteger(1, md5.digest()).toString(16);
         return md5Code;
+    }
+
+    /** commons获取MD5值*/
+    public static String getMD52(String idString){
+        return DigestUtils.md5Hex(idString);
+    }
+
+    /** 判读字符串是否为空*/
+    public static boolean strIsEmpty(String s) {
+        if (s == null) return true;
+        return s.trim().isEmpty();
     }
 }
